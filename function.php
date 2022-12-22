@@ -23,6 +23,7 @@ function passwordGen($length, $repeat, $letters, $number, $symbol) {
     if (($symbol)) {
         $generatePassword .= $special;
     }
+
     if ($repeat === 0) {
         $i = 0;
         while ($i < $length) {
@@ -33,7 +34,6 @@ function passwordGen($length, $repeat, $letters, $number, $symbol) {
             }
         }
         
-
     }else{
         $i = 0;
         while ($i < $length) {
