@@ -4,25 +4,6 @@ session_start();
 
 include_once __DIR__ . "/function.php";
 
-/* $length = 0;
-if (isset($_GET["length"])) {
-    $length = $_GET["length"];
-}
-
-$repeat = 0;
-if (isset($_GET["repeat"])) {
-    $repeat = $_GET["repeat"];
-}
-
-$letters = isset($_GET["letters"]) ?? '';
-$numbers = isset($_GET["numbers"]) ?? '';
-$symbols = isset($_GET["symbols"]) ?? '';
-
-$password = passwordGen($length, $repeat, $letters, $numbers, $symbols);
-$_SESSION["password"] = $password;
-
-header("Location: ./password.php"); */
-
 if (isset($_GET["length"])) {
     $length = $_GET["length"] ?? '';
     $repeat = $_GET["repeat"] ?? '';
