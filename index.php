@@ -1,7 +1,10 @@
 <?php
+
+session_start();
+
 include_once __DIR__ . "/function.php";
 
-$length = 0;
+/* $length = 0;
 if (isset($_GET["length"])) {
     $length = $_GET["length"];
 }
@@ -11,15 +14,32 @@ if (isset($_GET["repeat"])) {
     $repeat = $_GET["repeat"];
 }
 
-$letters = isset($_GET["letters"]);
-$number = isset($_GET["number"]);
-$symbol = isset($_GET["symbol"]);
+$letters = isset($_GET["letters"]) ?? '';
+$numbers = isset($_GET["numbers"]) ?? '';
+$symbols = isset($_GET["symbols"]) ?? '';
 
-$password = passwordGen($length, $repeat, $letters, $number, $symbol);
+$password = passwordGen($length, $repeat, $letters, $numbers, $symbols);
+$_SESSION["password"] = $password;
+
+header("Location: ./password.php"); */
+
+if (isset($_GET["length"])) {
+    $length = $_GET["length"] ?? '';
+    $repeat = $_GET["repeat"] ?? '';
+    $letters = $_GET["letters"] ?? 0;
+    $numbers = $_GET["numbers"] ?? 0;
+    $simbols = $_GET["symbols"] ?? 0;
+    $password = passwordGen($length, $repeat, $letters, $numbers, $simbols);
+    $_SESSION["password"] = $password;
+
+    header("Location: ./password.php");
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +47,7 @@ $password = passwordGen($length, $repeat, $letters, $number, $symbol);
     <title>php-strong-password-generator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
+
 <body class="bg-dark">
     <div class="container text-white text-center my-5">
         <div class="my-5">
@@ -34,7 +55,7 @@ $password = passwordGen($length, $repeat, $letters, $number, $symbol);
         </div>
         <div class="row">
             <div class="col-8 m-auto">
-                <div class='alert alert-primary p-1 fs-5'>Password Generata: <?php echo $password ?></div>
+                <div class='alert alert-primary p-1 fs-5'>Genera Password:</div>
                 <form class="bg-white p-2 radius text-black" action="" method="GET">
                     <div class="d-flex mt-2">
                         <div class="fs-5">Lunghezza password:</div>
@@ -56,11 +77,11 @@ $password = passwordGen($length, $repeat, $letters, $number, $symbol);
                                 <div class="ms-1">Lettere</div>
                             </div>
                             <div class="d-flex ms-4">
-                                <input type="checkbox" name="number">
+                                <input type="checkbox" name="numbers">
                                 <div class="ms-1">Numeri</div>
                             </div>
                             <div class="d-flex ms-4">
-                                <input type="checkbox" name="symbol">
+                                <input type="checkbox" name="symbols">
                                 <div class="ms-1">Simboli</div>
                             </div>
                         </div>
@@ -74,4 +95,5 @@ $password = passwordGen($length, $repeat, $letters, $number, $symbol);
         </div>
     </div>
 </body>
+
 </html>
